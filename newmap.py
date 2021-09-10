@@ -27,24 +27,15 @@ class AStarPathFinding:
         self.canvas.pack()
         self.reset()
         self.window.bind("<Button-1>", self.click)
-        self.nonebutton=Button(self.window,text="none", font=36, fg="black",command=self.BTnone)
-        self.nonebutton.place(x=2220,y=50)
-        self.wallbutton=Button(self.window,text="wall", font=36, fg="black",command=self.BTwall)
-        self.wallbutton.place(x=2220,y=150)
-        self.startbutton=Button(self.window,text="start", font=36, fg="black",command=self.BTstart)
-        self.startbutton.place(x=2220,y=250)
-        self.goalbutton=Button(self.window,text="goal", font=36, fg="black",command=self.BTgoal)
-        self.goalbutton.place(x=2220,y=350)
-        self.astarbutton=Button(self.window,text="astar", font=36, fg="black",command=self.BTastar)
-        self.astarbutton.place(x=2220,y=450)
-        self.resetbutton=Button(self.window, text="reset",font=36,fg="black",command=self.reset)
-        self.resetbutton.place(x=2220,y=550)
-        self.savebutton=Button(self.window, text="save",font=36,fg="black",command=self.BTsave)
-        self.savebutton.place(x=2220,y=650)
-        self.loadbutton=Button(self.window, text="load",font=36,fg="black",command=self.BTload)
-        self.loadbutton.place(x=2220,y=750)
+        Button(self.window,text="none", font=36, fg="black",command=self.BTnone).place(x=2220,y=50)
+        Button(self.window,text="wall", font=36, fg="black",command=self.BTwall).place(x=2220,y=150)
+        Button(self.window,text="start", font=36, fg="black",command=self.BTstart).place(x=2220,y=250)
+        Button(self.window,text="goal", font=36, fg="black",command=self.BTgoal).place(x=2220,y=350)
+        Button(self.window,text="astar", font=36, fg="black",command=self.BTastar).place(x=2220,y=450)
+        Button(self.window, text="reset",font=36,fg="black",command=self.reset).place(x=2220,y=550)
+        Button(self.window, text="save",font=36,fg="black",command=self.BTsave).place(x=2220,y=650)
+        Button(self.window, text="load",font=36,fg="black",command=self.BTload).place(x=2220,y=750)
         
-
     #initialize the board matrix to 0
     def boardZero(self):
         self.board=[]
@@ -101,10 +92,7 @@ class AStarPathFinding:
     def BTgoal(self):
         self.modenumber=3
     def BTastar(self):
-        if self.startcount==1 and self.goalcount==1 :
-            print() # astar 알고리즘 탐색
-        else:
-            messagebox.showinfo("Error","Start and Goal must have only one!!")
+        print() # fill up later
     def BTsave(self):
         self.newWindow=Toplevel(self.window)
         self.newWindow.title("file save")
@@ -134,7 +122,19 @@ class AStarPathFinding:
         self.canvas.delete("all")
         self.canvas.create_image(1093,451,image=self.photo)
         self.initialize_board()
-        
+        self.loadcount()
+
+    def loadcount(self):
+        startflag=np.any(self.board==2)
+        goalflag=np.any(self.board==3)
+        if startflag:
+            self.startcount=1
+        else:
+            self.startcount=0
+        if goalflag:
+            self.goalcount=1
+        else:
+            self.goalcount=0
     # ------------------------------------------------------------------
     # Drawing Functions:
     # The modules required to draw required game based object on canvas
