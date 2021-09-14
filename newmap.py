@@ -41,20 +41,20 @@ class AStarPathFinding:
         self.board=[]
         for i in range(verticalStepCount):
             for j in range(horizontalStepCount):
-                self.board=np.zeros(shape=(horizontalStepCount,verticalStepCount))
+                self.board=np.zeros(shape=(verticalStepCount,horizontalStepCount)) #fixed
 
     #fill board regard to matrix and create line
     def initialize_board(self):
         for i in range(verticalStepCount):
             for j in range(horizontalStepCount):
                 tagname="rect"+self.convertRecNum(j)+self.convertRecNum(i)
-                if(self.board[j][i]==0): # none
+                if(self.board[i][j]==0): # none #fixed
                     self.canvas.create_rectangle(j*length,i*length,(j+1)*length,(i+1)*length,tag=tagname)
-                elif(self.board[j][i]==1):# wall
+                elif(self.board[i][j]==1):# wall #fixed
                     self.canvas.create_rectangle(j*length,i*length,(j+1)*length,(i+1)*length,tag=tagname,fill="grey")
-                elif(self.board[j][i]==2):# start
+                elif(self.board[i][j]==2):# start #fixed
                     self.canvas.create_rectangle(j*length,i*length,(j+1)*length,(i+1)*length,tag=tagname,fill="green")
-                elif(self.board[j][i]==3):# goal
+                elif(self.board[i][j]==3):# goal #fixed
                     self.canvas.create_rectangle(j*length,i*length,(j+1)*length,(i+1)*length,tag=tagname,fill="red")
 
         for i in range(horizontalStepCount+1):#horizontal line
@@ -146,7 +146,7 @@ class AStarPathFinding:
         tagname="rect"+self.convertRecNum(x)+self.convertRecNum(y)
         if not self.modenumber==0:
             self.canvas.create_rectangle(x*length,y*length,(x+1)*length,(y+1)*length,tag=tagname,fill=Color[self.modenumber])
-            self.board[logical_position[0]][logical_position[1]]=self.modenumber
+            self.board[logical_position[1]][logical_position[0]]=self.modenumber #fixed
 
     def deleteRec(self,logical_position):
         if not self.modenumber==0:
@@ -154,7 +154,7 @@ class AStarPathFinding:
             y=int(logical_position[1])
             tagname="rect"+self.convertRecNum(x)+self.convertRecNum(y)
             self.canvas.delete(tagname)
-            self.board[logical_position[0]][logical_position[1]]=0
+            self.board[logical_position[1]][logical_position[0]]=0 # fixed
 
     # ------------------------------------------------------------------
     # Logical Functions:
@@ -169,7 +169,7 @@ class AStarPathFinding:
         return np.array(grid_position // (imagewidth / horizontalStepCount), dtype=int)
 
     def is_grid_occupied(self, logical_position):
-        if self.board[logical_position[0]][logical_position[1]] == 0:
+        if self.board[logical_position[1]][logical_position[0]] == 0: #fixed
             return False
         else:
             return True
@@ -199,7 +199,7 @@ class AStarPathFinding:
                 else:
                     self.drawRec(logical_position)
             else:
-                if self.modenumber==self.board[logical_position[0]][logical_position[1]]:
+                if self.modenumber==self.board[logical_position[1]][logical_position[0]]: #fixed
                     if self.modenumber==2:
                         if self.startcount==1:
                             self.deleteRec(logical_position)
