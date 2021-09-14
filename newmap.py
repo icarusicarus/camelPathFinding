@@ -111,6 +111,12 @@ class AStarPathFinding:
         self.modenumber = 3
 
     def BTastar(self):
+        startflag = np.any(self.board == 2)
+        goalflag = np.any(self.board == 3)
+
+        if not (startflag and goalflag):
+            messagebox.showinfo("Notice", "Please select start and goal point")
+
         class Node:
             def __init__(self, parent=None, position=None):
                 self.parent = parent
