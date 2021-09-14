@@ -148,9 +148,9 @@ class AStarPathFinding:
                         currentIdx = index
                 # openList에서 제거하고 closedList에 추가
                 openList.pop(currentIdx)
-                # self.canvas.create_rectangle(
-                #     (currentNode.position[1])*length, (currentNode.position[0])*length, (currentNode.position[1]+1)*length, (currentNode.position[0]+1)*length, fill="pink")
                 closedList.append(currentNode)
+                self.canvas.create_rectangle(
+                    (currentNode.position[1])*length, (currentNode.position[0])*length, (currentNode.position[1]+1)*length, (currentNode.position[0]+1)*length, fill="yellow")
                 # 현재 노드가 목적지면 current.position 추가하고
                 # current의 부모로 이동
                 if currentNode.position == endNode.position:
