@@ -3,6 +3,7 @@ from tkinter import messagebox
 from PIL import Image, ImageDraw, ImageTk
 from matplotlib.pyplot import grid
 import numpy as np
+import time
 # Define useful parameters
 imagewidth = 2200
 width = 2300
@@ -98,7 +99,6 @@ class AStarPathFinding:
     # ---------------------------------------------------------
     def BTnone(self):
         self.modenumber = 0
-        print(self.board)
 
     def BTwall(self):
         self.modenumber = 1
@@ -148,6 +148,8 @@ class AStarPathFinding:
                         currentIdx = index
                 # openList에서 제거하고 closedList에 추가
                 openList.pop(currentIdx)
+                # self.canvas.create_rectangle(
+                #     (currentNode.position[1])*length, (currentNode.position[0])*length, (currentNode.position[1]+1)*length, (currentNode.position[0]+1)*length, fill="pink")
                 closedList.append(currentNode)
                 # 현재 노드가 목적지면 current.position 추가하고
                 # current의 부모로 이동
@@ -158,8 +160,20 @@ class AStarPathFinding:
                         path.append(current.position)
                         current = current.parent
                     print(
-                        '!!!!!!!!!!!!!!!!!!!!!!!!!path!!!!!!!!!!!!!!!!!!!!!!!!!', path)
-                    return path[::-1]  # reverse
+                        '!!!!!!!!!!!!!!!!!!!!!!!!!PATH!!!!!!!!!!!!!!!!!!!!!!!!!\n', path)
+                    cells = path[::-1]
+                    for cell in cells:
+                        if cells.index(cell) == 0:
+                            self.canvas.create_rectangle(
+                                (cell[1])*length, (cell[0])*length, (cell[1]+1)*length, (cell[0]+1)*length, fill="green")
+                        elif cells.index(cell) == (len(cells) - 1):
+                            self.canvas.create_rectangle(
+                                (cell[1])*length, (cell[0])*length, (cell[1]+1)*length, (cell[0]+1)*length, fill="red")
+                        else:
+                            self.canvas.create_rectangle(
+                                (cell[1])*length, (cell[0])*length, (cell[1]+1)*length, (cell[0]+1)*length, fill="pink")
+                        # time.sleep(0.5)
+                    return
 
                 children = []
                 # 인접한 xy좌표 전부
@@ -206,7 +220,10 @@ class AStarPathFinding:
                             if child == openNode and child.g > openNode.g]) > 0:
                         continue
 
+                    self.canvas.create_rectangle(
+                        (child.position[1])*length, (child.position[0])*length, (child.position[1]+1)*length, (child.position[0]+1)*length, fill="blue")
                     openList.append(child)
+                    # time.sleep(0.5)
 
         start = (np.where(self.board == 2)[0].tolist()[0],
                  np.where(self.board == 2)[1].tolist()[0])
