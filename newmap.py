@@ -22,7 +22,7 @@ class AStarPathFinding:
         self.window = Tk()
         self.window.resizable(False, False)
         self.window.title("AStarPathFinding")
-        imgpath = "campusCapture.png"
+        imgpath = "Images/background.png"
         img = Image.open(imgpath)
         self.photo = ImageTk.PhotoImage(img)
         self.canvas = Canvas(self.window, width=width, height=height)
