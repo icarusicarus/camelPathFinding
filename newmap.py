@@ -22,7 +22,7 @@ class AStarPathFinding:
         self.window = Tk()
         self.window.resizable(False, False)
         self.window.title("AStarPathFinding")
-        imgpath = "campusCapture.png"
+        imgpath = "Images/background.png"
         img = Image.open(imgpath)
         self.photo = ImageTk.PhotoImage(img)
         self.canvas = Canvas(self.window, width=width, height=height)
@@ -111,6 +111,12 @@ class AStarPathFinding:
         self.modenumber = 3
 
     def BTastar(self):
+        startflag = np.any(self.board == 2)
+        goalflag = np.any(self.board == 3)
+
+        if not (startflag and goalflag):
+            messagebox.showinfo("Notice", "Please select start and goal point")
+
         class Node:
             def __init__(self, parent=None, position=None):
                 self.parent = parent
