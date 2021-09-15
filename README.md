@@ -40,10 +40,10 @@ Each button functions as follows.
 
 ###  Result Image
 1. Way from B/D 201 to B/D 207.
-<img src="https://github.com/icarusicarus/camelPathFinding/blob/main/Images/pnu.PNG">
+<img src="https://github.com/icarusicarus/camelPathFinding/blob/main/Images/pnu.gif">
 
 
 2. Random maze.
-<img src="https://github.com/icarusicarus/camelPathFinding/blob/main/Images/maze.PNG">
+<img src="https://github.com/icarusicarus/camelPathFinding/blob/main/Images/maze.gif">
 
 
